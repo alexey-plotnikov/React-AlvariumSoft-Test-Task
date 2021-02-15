@@ -1,0 +1,70 @@
+.filtration-panel-component {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 40px 50px 12px;
+
+  .price {
+    font-weight: bold;
+    color: #373737;
+  }
+
+  .range-to-sort {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .currency {
+    font-weight: bold;
+    color: #373737;
+  }
+
+  .currency-buttons {
+    display: flex;
+    flex-direction: row;
+    height: 32px;
+    width: 154px;
+    border-radius: 35px 35px 35px 35px;
+    border: 2px solid #b6b6b6;
+    background-color: white;
+
+    .usd-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 50%;
+      font-weight: 500;
+      color: #373737;
+      border-right: 2px solid#b6b6b6;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .uah-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 50%;
+      font-weight: 500;
+      color: #373737;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .sorting {
+    font-weight: bold;
+    color: #373737;
+  }
+
+  .sort-radio-button {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+}

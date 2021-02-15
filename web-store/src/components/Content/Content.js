@@ -1,6 +1,6 @@
 import React from "react";
 
-import MenuComponent from "components/Menu/Menu";
+import FiltrationPanelComponent from "components/FiltrationPanel/FiltrationPanel";
 import ProductsComponent from "components/Products/Products";
 import NewProductComponent from "components/NewProduct/NewProduct";
 import "./Content.scss";
@@ -10,10 +10,13 @@ const ContentComponent = (props) => {
 
   return (
     <div className="content-component">
-      CONTENT COMPONENT WORKS
-      <MenuComponent />
-      <ProductsComponent />
-      <NewProductComponent />
+      <div className="filtred-products">
+        <FiltrationPanelComponent />
+        <ProductsComponent />
+      </div>
+      <div>
+        <NewProductComponent />
+      </div>
     </div>
   );
 };

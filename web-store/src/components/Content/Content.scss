@@ -1,6 +1,16 @@
-.content-component  {
+.content-component {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 962px;
+  text-align: left;
+  background: #ffffff;
+  margin: auto;
+  background-color: lightgray;
+
+  .filtred-products {
+    display: flex;
+    flex-direction: row;
     height: 100%;
-    text-align: center;
-    background: #ffffff;
-    margin: auto;
+  }
 }
