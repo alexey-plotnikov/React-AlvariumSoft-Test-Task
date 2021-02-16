@@ -1,12 +1,20 @@
 import React from "react";
-import Radio from "@material-ui/core/Radio";
 
 import { FiltrationPanelConstants } from "common/constants";
+import { FiltrationPanelValues } from "common/constants";
 
 import "./FiltrationPanel.scss";
 
 const FiltrationPanelComponent = (props) => {
-  const {} = props;
+  const { activeButton, sortingOption, handleSortingOption } = props;
+
+  const getActiveButton = (type) => {
+    console.log(type);
+    if (type === activeButton) {
+
+      return FiltrationPanelValues.ACTIVE_BUTTON;
+    }
+  };
 
   return (
     <div className="filtration-panel-component">
@@ -23,20 +31,56 @@ const FiltrationPanelComponent = (props) => {
       </div>
       <p className="currency">{FiltrationPanelConstants.CURRENCY}</p>
       <div className="currency-buttons">
-        <div className="usd-button">{FiltrationPanelConstants.USD}</div>
-        <div className="uah-button">{FiltrationPanelConstants.UAH}</div>
+        <div
+          className={`usd-currency-button ${getActiveButton(
+            FiltrationPanelConstants.USD
+          )}`}
+        >
+          {FiltrationPanelConstants.USD}
+        </div>
+        <div
+          className={`uah-currency-button ${getActiveButton(
+            FiltrationPanelConstants.UAH
+          )}`}
+        >
+          {FiltrationPanelConstants.UAH}
+        </div>
       </div>
       <p className="sorting">{FiltrationPanelConstants.SORTING}</p>
-      <div className="sort-radio-button">
-        <Radio value="b" name="radio-button-demo" />
+      <div className="sorting-option">
+        <label className="radio-button">
+          <input
+            type="radio"
+            value={FiltrationPanelValues.LOW_TO_HIGH}
+            checked={sortingOption === FiltrationPanelValues.LOW_TO_HIGH}
+            onChange={(event) => handleSortingOption(event)}
+          />
+          <span className="checkmark"></span>
+        </label>
         <p>{FiltrationPanelConstants.LOW_TO_HIGH}</p>
       </div>
-      <div className="sort-radio-button">
-        <Radio value="b" name="radio-button-demo" />
+      <div className="sorting-option">
+        <label className="radio-button">
+          <input
+            type="radio"
+            value={FiltrationPanelValues.HIGH_TO_LOW}
+            checked={sortingOption === FiltrationPanelValues.HIGH_TO_LOW}
+            onChange={(event) => handleSortingOption(event)}
+          />
+          <span className="checkmark"></span>
+        </label>
         <p>{FiltrationPanelConstants.HIGH_TO_LOW}</p>
       </div>
-      <div className="sort-radio-button">
-        <Radio value="b" name="radio-button-demo" />
+      <div className="sorting-option">
+        <label className="radio-button">
+          <input
+            type="radio"
+            value={FiltrationPanelValues.ALPHABET}
+            checked={sortingOption === FiltrationPanelValues.ALPHABET}
+            onChange={(event) => handleSortingOption(event)}
+          />
+          <span className="checkmark"></span>
+        </label>
         <p>{FiltrationPanelConstants.ALPHABET}</p>
       </div>
     </div>

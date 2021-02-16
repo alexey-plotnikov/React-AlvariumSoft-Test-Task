@@ -6,12 +6,16 @@ import NewProductComponent from "components/NewProduct/NewProduct";
 import "./Content.scss";
 
 const ContentComponent = (props) => {
-  const {} = props;
+  const { activeButton, sortingOption, handleSortingOption } = props;
 
   return (
     <div className="content-component">
       <div className="filtred-products">
-        <FiltrationPanelComponent />
+        <FiltrationPanelComponent
+          activeButton={activeButton}
+          sortingOption={sortingOption}
+          handleSortingOption={(event) => handleSortingOption(event)}
+        />
         <ProductsComponent />
       </div>
       <div>

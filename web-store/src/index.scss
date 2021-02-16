@@ -9,11 +9,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-p {
-  margin: 0;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+p, label, span {
+  margin: 0;
+}
+
+@font-face {
+  font-family: "Jheronimus Regular";
+  src: local("Jheronimus Regular"), url(assets/fonts/Jheronimus-Regular.ttf) format("truetype");
 }

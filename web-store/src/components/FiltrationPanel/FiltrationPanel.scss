@@ -2,23 +2,60 @@
   display: flex;
   flex-direction: column;
   padding: 40px 40px 50px 12px;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
 
   .price {
+    font-family: "Jheronimus Regular";
     font-weight: bold;
+    font-size: 25px;
     color: #373737;
+    margin-bottom: 10px;
   }
 
   .range-to-sort {
     display: flex;
     flex-direction: row;
+    margin-bottom: 20px;
+
+    p {
+      font-family: "Jheronimus Regular";
+      font-weight: bold;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    input {
+      font-family: "Jheronimus Regular";
+      border: 2px solid #898989;
+      width: 100%;
+
+      &::-webkit-inner-spin-button,
+      ::-webkit-outer-spin-button {
+        opacity: 1;
+      }
+    }
+
+    .range-from {
+      width: 70px;
+      margin-right: auto;
+    }
+
+    .range-to {
+      width: 70px;
+    }
   }
 
   .currency {
+    font-family: "Jheronimus Regular";
     font-weight: bold;
+    font-size: 25px;
     color: #373737;
+    margin-bottom: 10px;
   }
 
   .currency-buttons {
+    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     height: 32px;
@@ -27,7 +64,7 @@
     border: 2px solid #b6b6b6;
     background-color: white;
 
-    .usd-button {
+    .usd-currency-button {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -42,7 +79,7 @@
       }
     }
 
-    .uah-button {
+    .uah-currency-button {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -58,13 +95,67 @@
   }
 
   .sorting {
+    font-family: "Jheronimus Regular";
     font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 10px;
     color: #373737;
   }
 
-  .sort-radio-button {
+  .sorting-option {
     display: flex;
     align-items: center;
     flex-direction: row;
+    margin-bottom: 5px;
+
+    p {
+      font-family: "Jheronimus Regular";
+      font-weight: bold;
+      font-size: 14px;
+      padding-left: 30px;
+    }
+
+    .radio-button {
+      display: flex;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+
+      input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+
+        &:checked {
+          ~ .checkmark {
+            &::after {
+              display: flex;
+            }
+          }
+        }
+      }
+
+      .checkmark {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        height: 19px;
+        width: 19px;
+        background-color: #e9e9e9;
+        border-radius: 50%;
+        border: 1px solid #898989;
+
+        &::after {
+          content: "";
+          position: absolute;
+          display: none;
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #898989;
+        }
+      }
+    }
   }
 }
