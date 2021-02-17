@@ -6,15 +6,19 @@ import {
   FiltrationPanelValues,
 } from "common/constants";
 
+import { Products } from "common/mocks";
+
 class ContentContainer extends React.Component {
   constructor() {
     super();
 
     this.state = {
+      products: Products,
+      filtredProducts: Products,
       sortingOption: FiltrationPanelValues.ALPHABET,
       lowerPriceLimit: "",
       upperPriceLimit: "",
-      activeButton: FiltrationPanelConstants.UAH,
+      currentCurrency: FiltrationPanelConstants.UAH,
     };
   }
 
@@ -25,18 +29,33 @@ class ContentContainer extends React.Component {
   }
 
   handleCurrencyChange(currency) {
+    const {products, filtredProducts} = this.state;
 
+    // let filteredUsers = filtredProducts;
+
+    // if (currency === "USD") {
+    //   filteredUsers = filteredUsers.map((product) => product.price = product.price * 0.36)
+    // } else {
+    //   filteredUsers = products;
+    // }
+
+    this.setState({
+      currentCurrency: currency,
+    });
   }
 
   render() {
-    const { activeButton, sortingOption } = this.state;
+    const { products, currentCurrency, sortingOption } = this.state;
 
     return (
       <div>
         <ContentComponent
-          activeButton={activeButton}
+          products={products}
+          currentCurrency={currentCurrency}
           sortingOption={sortingOption}
-          handleSortingOption={(currency) => this.handleCurrencyChange(currency)}
+          handleCurrencyChange={(currency) =>
+            this.handleCurrencyChange(currency)
+          }
           handleSortingOption={(event) => this.handleSortingOption(event)}
         />
       </div>

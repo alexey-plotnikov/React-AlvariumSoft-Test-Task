@@ -14,11 +14,18 @@ code {
     monospace;
 }
 
-p, label, span {
+p,
+label,
+span {
   margin: 0;
+}
+
+ul {
+  list-style: none;
 }
 
 @font-face {
   font-family: "Jheronimus Regular";
-  src: local("Jheronimus Regular"), url(assets/fonts/Jheronimus-Regular.ttf) format("truetype");
+  src: local("Jheronimus Regular"),
+    url(assets/fonts/Jheronimus-Regular.ttf) format("truetype");
 }

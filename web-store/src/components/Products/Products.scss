@@ -1,0 +1,17 @@
+.products-component {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 32px 55px 32px 55px;
+}
+
+.test {
+  margin-bottom: 20px;
+  
+  &:nth-child(odd) {
+    margin-right: auto;
+  }
+  //
+}

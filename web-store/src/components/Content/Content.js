@@ -6,17 +6,27 @@ import NewProductComponent from "components/NewProduct/NewProduct";
 import "./Content.scss";
 
 const ContentComponent = (props) => {
-  const { activeButton, sortingOption, handleSortingOption } = props;
+  const {
+    products,
+    currentCurrency,
+    sortingOption,
+    handleCurrencyChange,
+    handleSortingOption,
+  } = props;
 
   return (
     <div className="content-component">
       <div className="filtred-products">
         <FiltrationPanelComponent
-          activeButton={activeButton}
+          currentCurrency={currentCurrency}
           sortingOption={sortingOption}
+          handleCurrencyChange={(currency) => handleCurrencyChange(currency)}
           handleSortingOption={(event) => handleSortingOption(event)}
         />
-        <ProductsComponent />
+        <ProductsComponent
+          currentCurrency={currentCurrency}
+          products={products}
+        />
       </div>
       <div>
         <NewProductComponent />

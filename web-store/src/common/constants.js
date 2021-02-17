@@ -12,8 +12,13 @@ export const FiltrationPanelConstants = {
 };
 
 export const FiltrationPanelValues = {
+  
   ACTIVE_BUTTON: "active-button",
   LOW_TO_HIGH: "lowToHigh",
   HIGH_TO_LOW: "highToLow",
   ALPHABET: "alphabet",
 };
+
+export const ProductItemValues = {
+  USD_CURRENCY: 0.36
+}

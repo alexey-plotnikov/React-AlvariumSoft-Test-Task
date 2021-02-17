@@ -60,9 +60,6 @@
     flex-direction: row;
     height: 32px;
     width: 154px;
-    border-radius: 35px 35px 35px 35px;
-    border: 2px solid #b6b6b6;
-    background-color: white;
 
     .usd-currency-button {
       display: flex;
@@ -72,7 +69,10 @@
       width: 50%;
       font-weight: 500;
       color: #373737;
-      border-right: 2px solid#b6b6b6;
+      border: 2px solid #b6b6b6;
+      border-right: 1px solid#b6b6b6;
+      border-radius: 35px 0 0 35px;
+      background-color: white;
 
       &:hover {
         cursor: pointer;
@@ -87,10 +87,18 @@
       width: 50%;
       font-weight: 500;
       color: #373737;
+      border: 2px solid #b6b6b6;
+      border-left: 1px solid#b6b6b6;
+      border-radius: 0 35px 35px 0;
+      background-color: white;
 
       &:hover {
         cursor: pointer;
       }
+    }
+
+    .active-button {
+      background-color: #dbdbdb;
     }
   }
 

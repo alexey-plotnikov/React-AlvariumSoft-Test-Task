@@ -6,12 +6,15 @@ import { FiltrationPanelValues } from "common/constants";
 import "./FiltrationPanel.scss";
 
 const FiltrationPanelComponent = (props) => {
-  const { activeButton, sortingOption, handleSortingOption } = props;
+  const {
+    currentCurrency,
+    sortingOption,
+    handleCurrencyChange,
+    handleSortingOption,
+  } = props;
 
   const getActiveButton = (type) => {
-    console.log(type);
-    if (type === activeButton) {
-
+    if (type === currentCurrency) {
       return FiltrationPanelValues.ACTIVE_BUTTON;
     }
   };
@@ -32,16 +35,14 @@ const FiltrationPanelComponent = (props) => {
       <p className="currency">{FiltrationPanelConstants.CURRENCY}</p>
       <div className="currency-buttons">
         <div
-          className={`usd-currency-button ${getActiveButton(
-            FiltrationPanelConstants.USD
-          )}`}
+          className={`usd-currency-button ${getActiveButton(FiltrationPanelConstants.USD)}`}
+          onClick={() => handleCurrencyChange(FiltrationPanelConstants.USD)}
         >
           {FiltrationPanelConstants.USD}
         </div>
         <div
-          className={`uah-currency-button ${getActiveButton(
-            FiltrationPanelConstants.UAH
-          )}`}
+          className={`uah-currency-button ${getActiveButton(FiltrationPanelConstants.UAH)}`}
+          onClick={() => handleCurrencyChange(FiltrationPanelConstants.UAH)}
         >
           {FiltrationPanelConstants.UAH}
         </div>
