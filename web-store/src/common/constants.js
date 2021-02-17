@@ -20,5 +20,6 @@ export const FiltrationPanelValues = {
 };
 
 export const ProductItemValues = {
-  USD_CURRENCY: 0.36
+  ASSETS: "/assets/img/",
+  USD_CURRENCY: 0.036
 }

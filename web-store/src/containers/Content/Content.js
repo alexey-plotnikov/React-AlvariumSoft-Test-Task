@@ -6,15 +6,14 @@ import {
   FiltrationPanelValues,
 } from "common/constants";
 
-import { Products } from "common/mocks";
+import Products from "common/products.json";
 
 class ContentContainer extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      products: Products,
-      filtredProducts: Products,
+      products: Products.products,
       sortingOption: FiltrationPanelValues.ALPHABET,
       lowerPriceLimit: "",
       upperPriceLimit: "",
@@ -29,15 +28,6 @@ class ContentContainer extends React.Component {
   }
 
   handleCurrencyChange(currency) {
-    const {products, filtredProducts} = this.state;
-
-    // let filteredUsers = filtredProducts;
-
-    // if (currency === "USD") {
-    //   filteredUsers = filteredUsers.map((product) => product.price = product.price * 0.36)
-    // } else {
-    //   filteredUsers = products;
-    // }
 
     this.setState({
       currentCurrency: currency,
