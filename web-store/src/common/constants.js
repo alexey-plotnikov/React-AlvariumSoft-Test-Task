@@ -12,11 +12,12 @@ export const FiltrationPanelConstants = {
 };
 
 export const FiltrationPanelValues = {
-  
   ACTIVE_BUTTON: "active-button",
   LOW_TO_HIGH: "lowToHigh",
   HIGH_TO_LOW: "highToLow",
   ALPHABET: "alphabet",
+  LOWER_PRICE_LIMIT: "lowerPriceLimit",
+  UPPER_PRICE_LIMIT: "upperPriceLimit"
 };
 
 export const ProductItemValues = {

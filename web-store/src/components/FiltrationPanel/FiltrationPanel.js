@@ -9,7 +9,10 @@ const FiltrationPanelComponent = (props) => {
   const {
     currentCurrency,
     sortingOption,
+    lowerPriceLimit,
+    upperPriceLimit,
     handleCurrencyChange,
+    handlePriceLimits,
     handleSortingOption,
   } = props;
 
@@ -25,23 +28,39 @@ const FiltrationPanelComponent = (props) => {
       <div className="range-to-sort">
         <div className="range-from">
           <p>{FiltrationPanelConstants.FROM}</p>
-          <input type="number" min="0" />
+          <input
+            name={FiltrationPanelValues.LOWER_PRICE_LIMIT}
+            value={lowerPriceLimit}
+            type="number"
+            min="0"
+            onChange={(event) => handlePriceLimits(event)}
+          />
         </div>
         <div className="range-to">
           <p>{FiltrationPanelConstants.TO}</p>
-          <input type="number" min="0" />
+          <input
+            name={FiltrationPanelValues.UPPER_PRICE_LIMIT}
+            value={upperPriceLimit}
+            type="number"
+            min="0"
+            onChange={(event) => handlePriceLimits(event)}
+          />
         </div>
       </div>
       <p className="currency">{FiltrationPanelConstants.CURRENCY}</p>
       <div className="currency-buttons">
         <div
-          className={`usd-currency-button ${getActiveButton(FiltrationPanelConstants.USD)}`}
+          className={`usd-currency-button ${getActiveButton(
+            FiltrationPanelConstants.USD
+          )}`}
           onClick={() => handleCurrencyChange(FiltrationPanelConstants.USD)}
         >
           {FiltrationPanelConstants.USD}
         </div>
         <div
-          className={`uah-currency-button ${getActiveButton(FiltrationPanelConstants.UAH)}`}
+          className={`uah-currency-button ${getActiveButton(
+            FiltrationPanelConstants.UAH
+          )}`}
           onClick={() => handleCurrencyChange(FiltrationPanelConstants.UAH)}
         >
           {FiltrationPanelConstants.UAH}

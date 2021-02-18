@@ -8,9 +8,12 @@ import "./Content.scss";
 const ContentComponent = (props) => {
   const {
     products,
+    lowerPriceLimit,
+    upperPriceLimit,
     currentCurrency,
     sortingOption,
     handleCurrencyChange,
+    handlePriceLimits,
     handleSortingOption,
   } = props;
 
@@ -19,8 +22,11 @@ const ContentComponent = (props) => {
       <div className="filtred-products">
         <FiltrationPanelComponent
           currentCurrency={currentCurrency}
+          lowerPriceLimit={lowerPriceLimit}
+          upperPriceLimit={upperPriceLimit}
           sortingOption={sortingOption}
           handleCurrencyChange={(currency) => handleCurrencyChange(currency)}
+          handlePriceLimits={(event) => handlePriceLimits(event)}
           handleSortingOption={(event) => handleSortingOption(event)}
         />
         <ProductsComponent
