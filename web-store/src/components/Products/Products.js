@@ -4,11 +4,11 @@ import ProductItemComponent from "components/Products/ProductItem/ProductItem";
 import "./Products.scss";
 
 const ProductsComponent = (props) => {
-  const { currentCurrency, products } = props;
+  const { currentCurrency, filtredProducts } = props;
 
   return (
     <div className="products-component">
-      {products.map(({ id, name, price, image, description }) => (
+      {filtredProducts.map(({ id, name, price, image, description }) => (
         <div className="test" key={id}>
           <ProductItemComponent
             currentCurrency={currentCurrency}

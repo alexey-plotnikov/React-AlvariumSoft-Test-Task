@@ -6,12 +6,12 @@ import "./ProductItem.scss";
 const ProductItemComponent = (props) => {
   const { currentCurrency, name, price, image, description } = props;
 
-  const currencyChange = (price) => {
-    if (currentCurrency === FiltrationPanelConstants.USD) {
-      price = price * ProductItemValues.USD_CURRENCY;
-      return price.toFixed(2);
-    } else return price;
-  };
+  // const currencyChange = (price) => {
+  //   if (currentCurrency === FiltrationPanelConstants.USD) {
+  //     price = price * ProductItemValues.USD_CURRENCY;
+  //     return price.toFixed(2);
+  //   } else return price;
+  // };
 
   return (
     <div className="product-item-component">
@@ -25,7 +25,7 @@ const ProductItemComponent = (props) => {
       <div className="product-item-information">
         <p className="product-item-name">{name}</p>
         <p className="product-item-price">
-          {currencyChange(price) + " " + currentCurrency}
+          {price + " " + currentCurrency}
         </p>
         <div className="product-item-description">{description}</div>
       </div>

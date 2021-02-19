@@ -1,20 +1,18 @@
 import React from "react";
 
 import ContentComponent from "components/Content/Content";
-import {
-  FiltrationPanelConstants,
-  FiltrationPanelValues,
-} from "common/constants";
 
-import Products from "common/products.json";
+import { FiltrationPanelConstants, FiltrationPanelValues } from "common/constants";
+
+import productsJSON from "common/products.json";
 
 class ContentContainer extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      products: Products.products,
-      filtredProducts: Products.products,
+      listOfProducts: productsJSON.products,
+      listOfFiltredProducts: productsJSON.products,
       sortingOption: "",
       lowerPriceLimit: "",
       upperPriceLimit: "",
@@ -27,14 +25,13 @@ class ContentContainer extends React.Component {
   }
 
   handleDefaultPriceLimits() {
-    const { filtredProducts } = this.state;
+    const { listOfFiltredProducts } = this.state;
 
-    const min = filtredProducts.reduce((acc, curr) => {
-      return acc.price < curr.price ? acc : curr;
+    const min = listOfFiltredProducts.reduce((acc, curr) => {
+      return parseFloat(acc.price) < parseFloat(curr.price) ? acc : curr;
     });
-
-    const max = filtredProducts.reduce((acc, curr) => {
-      return acc.price > curr.price ? acc : curr;
+    const max = listOfFiltredProducts.reduce((acc, curr) => {
+      return parseFloat(acc.price) > parseFloat(curr.price) ? acc : curr;
     });
 
     this.setState({
@@ -44,89 +41,86 @@ class ContentContainer extends React.Component {
   }
 
   handlePriceLimits(event) {
-    this.setState(
-      {
-        [event.target.name]: event.target.value,
-      },
-      () => {
-        this.handleSorting();
-      }
-    );
-  }
-
-  handleSortingOption(event) {
     this.setState({
-      sortingOption: event.target.value
-    },
-      () => {
-        this.handleSorting(event.target.value);
-      }
-    );
-  }
-
-  handleSorting(sortingOption) {
-    const { products, lowerPriceLimit, upperPriceLimit } = this.state;
-
-    let filtredProducts = [];
-
-    if (sortingOption === FiltrationPanelValues.ALPHABET) {
-      filtredProducts = products.sort((first, second) => {
-        if (first.name.toLowerCase() < second.name.toLowerCase()) return -1;
-        if (first.name.toLowerCase() > second.name.toLowerCase()) return 1;
-        return 0;
-      });
-    } else if (sortingOption === FiltrationPanelValues.LOW_TO_HIGH) {
-      filtredProducts = products.sort((first, second) => {
-        if (first.price < second.price) return -1;
-        if (first.price > second.price) return 1;
-        return 0;
-      });
-    } else if (sortingOption === FiltrationPanelValues.HIGH_TO_LOW) {
-      filtredProducts = products.sort((first, second) => {
-        if (first.price > second.price) return -1;
-        if (first.price < second.price) return 1;
-        return 0;
-      });
-    }
-
-    filtredProducts = products.filter((product) => {
-      if (product.price >= lowerPriceLimit 
-        && product.price <= upperPriceLimit) {
-        return product;
-      }
-    });
-
-    this.setState({
-      filtredProducts: filtredProducts,
+      [event.target.name]: event.target.value,
+    }, () => {
+      this.handleSorting();
     });
   }
 
   handleCurrencyChange(currency) {
     this.setState({
       currentCurrency: currency,
+    }, () => {
+      this.handleSorting();
+    });
+  }
+
+  handleSortingOption(event) {
+    this.setState({
+      sortingOption: event.target.value,
+    }, () => {
+      this.handleSorting();
+    });
+  }
+
+  handleSorting() {
+    const { listOfProducts, lowerPriceLimit, upperPriceLimit, sortingOption, currentCurrency } = this.state;
+
+    let filtredProducts = [...listOfProducts];
+
+    filtredProducts.sort((first, second) => {
+      switch (sortingOption) {
+        case FiltrationPanelValues.ALPHABET:
+          if (first.name.toLowerCase() < second.name.toLowerCase()) return -1;
+          if (first.name.toLowerCase() > second.name.toLowerCase()) return 1;
+          return 0;
+        case FiltrationPanelValues.LOW_TO_HIGH:
+          if (first.price < second.price) return -1;
+          if (first.price > second.price) return 1;
+          return 0;
+        case FiltrationPanelValues.HIGH_TO_LOW:
+          if (first.price > second.price) return -1;
+          if (first.price < second.price) return 1;
+          return 0;
+      }
+    });
+
+    filtredProducts = filtredProducts.filter((product) => {
+      if (product.price >= lowerPriceLimit && product.price <= upperPriceLimit) {
+        return product;
+      }
+    });
+
+    if (currentCurrency === 'USD') {
+      filtredProducts = filtredProducts.map((product) => {
+        let result = { ...product, price: (product.price * 0.036).toFixed(2) };
+        return result;
+      })
+    }
+
+    this.setState({
+      listOfFiltredProducts: filtredProducts,
     });
   }
 
   render() {
     const {
-      filtredProducts,
+      listOfFiltredProducts,
       lowerPriceLimit,
       upperPriceLimit,
       currentCurrency,
-      sortingOption,
-    } = this.state;
+      sortingOption } = this.state;
 
     return (
       <div>
         <ContentComponent
-          products={filtredProducts}
+          filtredProducts={listOfFiltredProducts}
           lowerPriceLimit={lowerPriceLimit}
           upperPriceLimit={upperPriceLimit}
           currentCurrency={currentCurrency}
           sortingOption={sortingOption}
-          handleCurrencyChange={(currency) =>
-            this.handleCurrencyChange(currency)
-          }
+          handleCurrencyChange={(currency) => this.handleCurrencyChange(currency)}
           handlePriceLimits={(event) => this.handlePriceLimits(event)}
           handleSortingOption={(event) => this.handleSortingOption(event)}
         />

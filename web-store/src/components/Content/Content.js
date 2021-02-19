@@ -7,7 +7,7 @@ import "./Content.scss";
 
 const ContentComponent = (props) => {
   const {
-    products,
+    filtredProducts,
     lowerPriceLimit,
     upperPriceLimit,
     currentCurrency,
@@ -31,7 +31,7 @@ const ContentComponent = (props) => {
         />
         <ProductsComponent
           currentCurrency={currentCurrency}
-          products={products}
+          filtredProducts={filtredProducts}
         />
       </div>
       <div>
