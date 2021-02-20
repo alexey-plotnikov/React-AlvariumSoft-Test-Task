@@ -16,33 +16,20 @@ class ContentContainer extends React.Component {
       sortingOption: "",
       lowerPriceLimit: "",
       upperPriceLimit: "",
+      isChanged: false,
       currentCurrency: FiltrationPanelConstants.UAH,
     };
   }
 
   componentDidMount() {
-    this.handleDefaultPriceLimits();
-  }
+    const {listOfFiltredProducts} = this.state;
 
-  handleDefaultPriceLimits() {
-    const { listOfFiltredProducts } = this.state;
-
-    const min = listOfFiltredProducts.reduce((acc, curr) => {
-      return parseFloat(acc.price) < parseFloat(curr.price) ? acc : curr;
-    });
-    const max = listOfFiltredProducts.reduce((acc, curr) => {
-      return parseFloat(acc.price) > parseFloat(curr.price) ? acc : curr;
-    });
-
-    this.setState({
-      lowerPriceLimit: min.price,
-      upperPriceLimit: max.price,
-    });
+    this.handleDefaultPriceLimits(listOfFiltredProducts)
   }
 
   handlePriceLimits(event) {
     this.setState({
-      [event.target.name]: event.target.value,
+      [event.target.name]: parseFloat(event.target.value),
     }, () => {
       this.handleSorting();
     });
@@ -51,8 +38,9 @@ class ContentContainer extends React.Component {
   handleCurrencyChange(currency) {
     this.setState({
       currentCurrency: currency,
+      isChanged: true
     }, () => {
-      this.handleSorting();
+      this.handleSorting(currency);
     });
   }
 
@@ -64,10 +52,8 @@ class ContentContainer extends React.Component {
     });
   }
 
-  handleSorting() {
-    const { listOfProducts, lowerPriceLimit, upperPriceLimit, sortingOption, currentCurrency } = this.state;
-
-    let filtredProducts = [...listOfProducts];
+  filterByOrder(filtredProducts) {
+    const { sortingOption } = this.state;
 
     filtredProducts.sort((first, second) => {
       switch (sortingOption) {
@@ -83,24 +69,73 @@ class ContentContainer extends React.Component {
           if (first.price > second.price) return -1;
           if (first.price < second.price) return 1;
           return 0;
+        default:
+          return filtredProducts;
       }
     });
+    return filtredProducts;
+  }
 
-    filtredProducts = filtredProducts.filter((product) => {
-      if (product.price >= lowerPriceLimit && product.price <= upperPriceLimit) {
-        return product;
-      }
-    });
+  handleNewPrice(filtredProducts, currency) {
+    const { currentCurrency } = this.state;
 
-    if (currentCurrency === 'USD') {
+    if (currentCurrency === FiltrationPanelConstants.USD) {
       filtredProducts = filtredProducts.map((product) => {
-        let result = { ...product, price: (product.price * 0.036).toFixed(2) };
+        let result = {
+          ...product,
+          price: parseFloat((product.price * FiltrationPanelValues.USD_CURRENCY).toFixed(2))
+        };
         return result;
       })
     }
+    return filtredProducts;
+  }
+
+  filterByPrice(filtredProducts) {
+    const { lowerPriceLimit, upperPriceLimit } = this.state;
+
+    const result = filtredProducts.filter((product) => {
+      if (parseFloat(product.price) >= lowerPriceLimit && parseFloat(product.price) <= upperPriceLimit) {
+        return product;
+      }
+    })
+    return result;
+  }
+
+  handleSorting(currency) {
+    const { listOfProducts, isChanged } = this.state;
+
+    let filtredProducts = [...listOfProducts];
+
+    filtredProducts = this.handleNewPrice(filtredProducts, currency);
+
+    if (isChanged === true) {
+      this.handleDefaultPriceLimits(filtredProducts)
+    } else {
+      filtredProducts = this.filterByPrice(filtredProducts);
+    }
+
+    filtredProducts = this.filterByOrder(filtredProducts);
 
     this.setState({
       listOfFiltredProducts: filtredProducts,
+    });
+  }
+
+  handleDefaultPriceLimits(filtredProducts) {
+    const min = filtredProducts.reduce((acc, curr) => {
+      return parseFloat(acc.price) < parseFloat(curr.price) ? acc : curr;
+    });
+    const max = filtredProducts.reduce((acc, curr) => {
+      return parseFloat(acc.price) > parseFloat(curr.price) ? acc : curr;
+    });
+
+    this.setState({
+      lowerPriceLimit: min.price,
+      upperPriceLimit: max.price,
+      isChanged: false
+    }, () => {
+      this.filterByPrice(filtredProducts)
     });
   }
 

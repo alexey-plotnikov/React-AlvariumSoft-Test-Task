@@ -17,10 +17,11 @@ export const FiltrationPanelValues = {
   HIGH_TO_LOW: "highToLow",
   ALPHABET: "alphabet",
   LOWER_PRICE_LIMIT: "lowerPriceLimit",
-  UPPER_PRICE_LIMIT: "upperPriceLimit"
+  UPPER_PRICE_LIMIT: "upperPriceLimit",
+  USD_CURRENCY: 0.036
 };
 
 export const ProductItemValues = {
   ASSETS: "/assets/img/",
-  USD_CURRENCY: 0.036
+  
 }
