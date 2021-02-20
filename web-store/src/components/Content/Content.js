@@ -2,7 +2,6 @@ import React from "react";
 
 import FiltrationPanelComponent from "components/FiltrationPanel/FiltrationPanel";
 import ProductsComponent from "components/Products/Products";
-import NewProductComponent from "components/NewProduct/NewProduct";
 import "./Content.scss";
 
 const ContentComponent = (props) => {
@@ -33,9 +32,6 @@ const ContentComponent = (props) => {
           currentCurrency={currentCurrency}
           filtredProducts={filtredProducts}
         />
-      </div>
-      <div>
-        <NewProductComponent />
       </div>
     </div>
   );

@@ -6,13 +6,6 @@ import "./ProductItem.scss";
 const ProductItemComponent = (props) => {
   const { currentCurrency, name, price, image, description } = props;
 
-  // const currencyChange = (price) => {
-  //   if (currentCurrency === FiltrationPanelConstants.USD) {
-  //     price = price * ProductItemValues.USD_CURRENCY;
-  //     return price.toFixed(2);
-  //   } else return price;
-  // };
-
   return (
     <div className="product-item-component">
       <div className="product-item-image">

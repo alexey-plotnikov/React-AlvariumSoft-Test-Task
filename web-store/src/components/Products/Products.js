@@ -9,7 +9,7 @@ const ProductsComponent = (props) => {
   return (
     <div className="products-component">
       {filtredProducts.map(({ id, name, price, image, description }) => (
-        <div className="test" key={id}>
+        <div className="product-items" key={id}>
           <ProductItemComponent
             currentCurrency={currentCurrency}
             name={name}
